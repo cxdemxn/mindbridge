@@ -14,7 +14,126 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      journal_entries: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          mood: Database["public"]["Enums"]["mood_type"] | null
+          tags: string[] | null
+          title: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          mood?: Database["public"]["Enums"]["mood_type"] | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          mood?: Database["public"]["Enums"]["mood_type"] | null
+          tags?: string[] | null
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      mood_entries: {
+        Row: {
+          activities: string[] | null
+          created_at: string
+          id: string
+          mood: Database["public"]["Enums"]["mood_type"]
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          activities?: string[] | null
+          created_at?: string
+          id?: string
+          mood: Database["public"]["Enums"]["mood_type"]
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          activities?: string[] | null
+          created_at?: string
+          id?: string
+          mood?: Database["public"]["Enums"]["mood_type"]
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          goals: string[] | null
+          id: string
+          onboarding_completed: boolean
+          preferred_name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          goals?: string[] | null
+          id?: string
+          onboarding_completed?: boolean
+          preferred_name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          goals?: string[] | null
+          id?: string
+          onboarding_completed?: boolean
+          preferred_name?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +142,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      mood_type: "great" | "good" | "okay" | "low" | "bad"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +269,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      mood_type: ["great", "good", "okay", "low", "bad"],
+    },
   },
 } as const
